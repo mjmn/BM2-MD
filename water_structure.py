@@ -54,11 +54,12 @@ TRR = sys.argv[2]
 u = mda.Universe(TPR,TRR)
 bto = -1 # Initial time-bin
 # Derrived output size
+timestep = u.trajectory[0].dt
 sx = math.ceil((maxx-minx)/dx) # number of bins along channel coordinate
-st = math.floor(len(u.trajectory)*u.trajectory[0].dt/dt) # Number of bins in time
+st = math.floor(len(u.trajectory)*timestep/dt) # Number of bins in time
 sc = math.ceil(2.0/dcos) # Number of bins in cosine distributions
 # Make sure the time-blocks requested are not too long
-if len(u.trajectory)*u.trajectory[0].dt < dt:
+if len(u.trajectory)*timestep < dt:
     print("Error; requested time-block is longer than the entire trajectory")
     exit()
 # Pre-create zero arrays for analysis output
@@ -80,7 +81,7 @@ water_H = u.select_atoms('moltype TIP3 and type HT') # Water hydrogens
 for ts in u.trajectory[startT:]:
     #print(ts.time)
     # Current time-bin
-    bt = int((ts.time - startT*u.trajectory[0].dt)/dt)
+    bt = int((ts.time - startT*timestep)/dt)
     # for avoiding incomplete time-blocks
     if bt>=st:#st:
         break
