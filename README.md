@@ -19,3 +19,21 @@ Returns the mean-squared displacement of water molecules in the channel, as a fu
 # water_Crot.py (Fig 3e-f, S3a)
 Example: ./water_Crot.py md.tpr md.xtc
 Returns 0.5*<3*\mu(t)\cdot\mu(t+\tau) - 1>_t and <\mu(t)\cdot\mu(t+\tau)>_t for the dipole vector (\mu) of water molecules in the channel, as a function of channel-axis coordinate (-32:4:32 range). By default, calculated for \tau=0:10ps:200ps. This can be adjusted as needed. Each water molecules' contribution is added based on the bin where the water molecule resides at \tau=0 (i.e., water molecules can move between bins and will still be included in the analysis).
+
+# water_hydrogen_bond_network.py (Fig. 7b-d)
+Example: 
+./water_hydrogen_bond_network.py \
+--directory_for_output /output_directory \
+--title_of_job network_analysis_job \
+--dictionary_of_simulations simulations_dictionary.json \
+--selected_simulations P01 P4 \
+--dictionary_of_colors colors_dictionary.json \
+--minimum_axis_value -20 \
+--maximum_axis_value 22 \
+--axis_increments 2 \
+--frame_stride 10 \
+--minimum_y_for_plot -21 \
+--maximum_y_for_plot 21 \
+--residue_numbers_for_label 8 12 16 19 23 27 &
+Returns statistics on the hydrogen bonds, hydrogen bond directionality, and bottleneecks between adjacent channel axis slices (-20:2:22 range, with first and last bins having length of 1, which may be useful for axis scaling so bulk data does not cause scaling issues and may be problematic in other cases). A printout and plots are generated. The plots were processsed in Adobe Illustrator for clarity. Note all frames are included in all analyses, and also that there is a more recent version of the hydrogen bond module (MDAnalysis.analysis.hydrogenbonds.hbond_analysis) which, to the best of our knowledge, did not exist when this analysis was developed
+
