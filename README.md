@@ -35,50 +35,50 @@ Returns 0.5*<3*\mu(t)\cdot\mu(t+\tau) - 1>_t and <\mu(t)\cdot\mu(t+\tau)>_t for 
 
 # water_hydrogen_bond_network.py (Fig. 7b-d)
 Example:
-./water_hydrogen_bond_network.py \\
---directory_for_output /network_analysis_output_directory \\
---title_of_job network_analysis_job \\
---dictionary_of_simulations simulations_dictionary.json \\
---selected_simulations P01 P4 \\
---dictionary_of_colors colors_dictionary.json \\
---minimum_axis_value -20 \\
---maximum_axis_value 22 \\
---axis_increments 2 \\
---frame_stride 10 \\
---minimum_y_for_plot -21 \\
---maximum_y_for_plot 21 \\
+./water_hydrogen_bond_network.py \\  
+--directory_for_output /network_analysis_output_directory \\  
+--title_of_job network_analysis_job \\  
+--dictionary_of_simulations simulations_dictionary.json \\  
+--selected_simulations P01 P4 \\  
+--dictionary_of_colors colors_dictionary.json \\  
+--minimum_axis_value -20 \\  
+--maximum_axis_value 22 \\  
+--axis_increments 2 \\  
+--frame_stride 10 \\  
+--minimum_y_for_plot -21 \\  
+--maximum_y_for_plot 21 \\  
 --residue_numbers_for_label 8 12 16 19 23 27 &  
 Returns statistics on the hydrogen bonds, hydrogen bond directionality, and bottlenecks between adjacent channel axis slices (-20:2:22 range, with first and last bins having length of 1, which may be useful for axis scaling so bulk data does not cause scaling issues and may be problematic in other cases). A printout and plots are generated, as well as a .npy data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., setting projections to be standardized on all plots, to a higher-strided projection value used earlier). Note all frames analyzed are included in all analyses (i.e., frames where there are no waters are not excluded), and also that there is a more recent version of the hydrogen bond module (MDAnalysis.analysis.hydrogenbonds.hbond_analysis) which, to the best of our knowledge, did not exist when this analysis was developed. The argparse section (obtained by running "./water_hydrogen_bond_network.py -h" contains more information on the different arguments).
 
 # protein_minimum_distance.py (Fig.S1b)
 Example:
-./protein_minimum_distance.py \\
---selected_residue_numbers 8 12 16 19 23 27 --residue_numbers_for_label 8 12 16 19 23 27 \\
---directory_for_output /minimum_distance_output_directory \\
---title_of_job minimum_distance_job \\
---dictionary_of_simulations simulations_dictionary.json \\
---selected_simulations P01 P4 \
---dictionary_of_colors colors_dictionary.json \\
---frame_stride 1 \\
---minimum_x_for_plot 0 \\
---maximum_x_for_plot 18 \\
---minimum_y_for_plot -18 \\
---maximum_y_for_plot 18 \\
+./protein_minimum_distance.py \\  
+--selected_residue_numbers 8 12 16 19 23 27 --residue_numbers_for_label 8 12 16 19 23 27 \\  
+--directory_for_output /minimum_distance_output_directory \\  
+--title_of_job minimum_distance_job \\  
+--dictionary_of_simulations simulations_dictionary.json \\  
+--selected_simulations P01 P4 \\  
+--dictionary_of_colors colors_dictionary.json \\  
+--frame_stride 1 \\  
+--minimum_x_for_plot 0 \\  
+--maximum_x_for_plot 18 \\  
+--minimum_y_for_plot -18 \\  
+--maximum_y_for_plot 18 \\  
 --dictionary_of_structures structures_dictionary.json &  
 Returns minimum distances between heavy atoms of the same residue on diagonally placed side chains. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., setting projections to be standardized on all plots, to a higher-strided projection value used earlier). The argparse section (obtained by running "./protein_minimum_distance.py -h" contains more information on the different arguments).
 
 # protein_RMSD.py (Fig. S1c-d)
 Example:
-./protein_RMSD.py \\
---directory_for_output RMSD_output_directory \\
---title_of_job RMSD_job \\
---dictionary_of_simulations simulations_dictionary.json \\
---dictionary_of_colors colors_dictionary.json \\
---dictionary_of_selections selections_dictionary.json \\
---frame_stride 10 \\
---minimum_y_for_plot 0.0 \\
---maximum_y_for_plot 5.0 \\
---minimum_x_for_plot 0.0 \\
+./protein_RMSD.py \\  
+--directory_for_output RMSD_output_directory \\  
+--title_of_job RMSD_job \\  
+--dictionary_of_simulations simulations_dictionary.json \\  
+--dictionary_of_colors colors_dictionary.json \\  
+--dictionary_of_selections selections_dictionary.json \\  
+--frame_stride 10 \\  
+--minimum_y_for_plot 0.0 \\  
+--maximum_y_for_plot 5.0 \\  
+--minimum_x_for_plot 0.0 \\  
 --maximum_x_for_plot 135.0 &  
 Returns RMSDs of selected portions of the protein over the trajectory, each relative to a reference. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., changing colors).
 
