@@ -80,6 +80,6 @@ Example:
 --maximum_y_for_plot 5.0 \\  
 --minimum_x_for_plot 0.0 \\  
 --maximum_x_for_plot 135.0 &  
-Returns RMSDs of selected portions of the protein over the trajectory, each relative to a reference. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., changing colors).
+Returns RMSDs of selected portions of the protein over the trajectory, each relative to a reference. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., changing colors). The argparse section (obtained by running "./protein_RMSD.py -h" contains more information on the different arguments).
 
 
