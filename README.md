@@ -3,6 +3,7 @@ BM2 collaboration - Simulation analysis scripts
 
 # Overview
 All scripts take two inputs: a gromacs simulation input file [TPR] and a gromacs trajectory [XTC/TRR]. Additional details on what each script calcualtes are provided below. For help, execute a script with the `-h` flag.
+When projections are used, they are based on the Ca coordinates of the relevant residues.
 
 # Citations
 MDAnalysis is used in these scripts. References for MDAnalysis are:
@@ -48,7 +49,7 @@ Example:
 --minimum_y_for_plot -21 \\  
 --maximum_y_for_plot 21 \\  
 --residue_numbers_for_label 8 12 16 19 23 27 &  
-Returns statistics on the hydrogen bonds, hydrogen bond directionality, and bottlenecks between adjacent channel axis slices (-20:2:22 range, with first and last bins having length of 1, which may be useful for axis scaling so bulk data does not cause scaling issues and may be problematic in other cases). A printout and plots are generated, as well as a .npy data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., setting projections to be standardized on all plots, to a higher-strided projection value used earlier). Note all frames analyzed are included in all analyses (i.e., frames where there are no waters are not excluded), and also that there is a more recent version of the hydrogen bond module (MDAnalysis.analysis.hydrogenbonds.hbond_analysis) which, to the best of our knowledge, did not exist when this analysis was developed. The argparse section (obtained by running "./water_hydrogen_bond_network.py -h" contains more information on the different arguments).
+Returns statistics on the hydrogen bonds, hydrogen bond directionality, and bottlenecks between adjacent channel axis slices (-20:2:22 range, with first and last bins having length of 1, which may be useful for axis scaling so bulk data does not cause scaling issues and may be problematic in other cases). A printout and plots are generated, as well as a .npy data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., setting projections to be standardized on all plots, to a higher-strided projection value used earlier). Note all frames analyzed are included in all analyses (i.e., frames where there are no waters are not excluded- preliminary checks indicate such exclusion does not drastically alter results). There is a more recent version of the hydrogen bond module (MDAnalysis.analysis.hydrogenbonds.hbond_analysis) which, to the best of our knowledge, did not exist when this analysis was developed. One observation that was made after this workflow was developed is that the standard settings for this module appear to be a bit overly generous, giving more hydrogen bonds than expected for protein atoms when analyzing protein-water hydrogen bonds (https://docs.mdanalysis.org/stable/documentation_pages/analysis/hbond_analysis.html explains the angle cutoff may be why). While revising the cutoffss may be of interest in the future, the default settings' being generous here may be helpful, because with striding, this helps ensure hydrogen bonds are not missed. Updating to the newer module may be of interest in the future. The argparse section (obtained by running "./water_hydrogen_bond_network.py -h") contains more information on the different arguments.
 
 # protein_minimum_distance.py (Fig.S1b)
 Example:
@@ -65,7 +66,7 @@ Example:
 --minimum_y_for_plot -18 \\  
 --maximum_y_for_plot 18 \\  
 --dictionary_of_structures structures_dictionary.json &  
-Returns minimum distances between heavy atoms of the same residue on diagonally placed side chains. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., setting projections to be standardized on all plots, to a higher-strided projection value used earlier). The argparse section (obtained by running "./protein_minimum_distance.py -h" contains more information on the different arguments).
+Returns minimum distances between heavy atoms of the same residue on diagonally placed side chains. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., setting projections to be standardized on all plots, to a higher-strided projection value used earlier). The argparse section (obtained by running "./protein_minimum_distance.py -h") contains more information on the different arguments.
 
 # protein_RMSD.py (Fig. S1c-d)
 Example:
@@ -80,6 +81,6 @@ Example:
 --maximum_y_for_plot 5.0 \\  
 --minimum_x_for_plot 0.0 \\  
 --maximum_x_for_plot 135.0 &  
-Returns RMSDs of selected portions of the protein over the trajectory, each relative to a reference. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., changing colors). The argparse section (obtained by running "./protein_RMSD.py -h" contains more information on the different arguments).
+Returns RMSDs of selected portions of the protein over the trajectory, each relative to a reference. A printout and plots are generated, as well as a .json data file. The plots were then processed in Adobe Illustrator for clarity and standardization (e.g., changing colors). The argparse section (obtained by running "./protein_RMSD.py -h") contains more information on the different arguments.
 
 
