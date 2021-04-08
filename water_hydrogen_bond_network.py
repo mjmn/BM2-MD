@@ -279,6 +279,12 @@ def replicate_network_analysis(args, ch_ax_list, replicate_directory, analysis_o
     calphas = univ_for_analysis.select_atoms('protein and name CA') #All Calphas
     waters = univ_for_analysis.select_atoms('resname TIP3 and not (name H* or name [123]H or type H)') #Water oxygens
 
+    #Set up channel binning
+    increment_for_edges = float(args.axis_increments) / 2.0 #define increment for edges- to ensure consistent bin size throughout, ** This is an update and was not used in the script to generate the Communications Biology figures. Instead, the channel axis bounds were args.minimum_axis_value and args.maximum_axis_value: so the bins at the edges were half as large as the other bins. With this update, all bins should be the same size.
+    minimum_axis_value_for_inclusion = args.minimum_axis_value - increment_for_edges #minimum axis projection for inclusion
+    maximum_axis_value_for_inclusion = args.maximum_axis_value + increment_for_edges #maximum axis projection for inclusion
+    analysis_output.write(f"Minimum projection for inclusion {minimum_axis_value_for_inclusion}\nMaximum projection for inclusion {maximum_axis_value_for_inclusion}\n")
+
     #############
     #If the user wants to label residues with their channel axis projections, calculate the channel axis projections and determine the label for each residue
     #Note this involves a sacrifice of runtime for modularity- some calculations in calc_channel_projection are repeated in the H bond analysis code below, but this arrangement enables using the calc_channel_projection code used in another script, and thus this arrangement was selected
@@ -357,7 +363,7 @@ def replicate_network_analysis(args, ch_ax_list, replicate_directory, analysis_o
             posOyz2 = npla.norm(posO)**2 - abs(posOx)**2 #This calculates how far the oxygen is from the channel axis coordinate line
 
             #If the water is within the desired channel axis coordinate bounds, and it is within square root of cylR2 from the channel axis coordinate line, determine the appropriate bin and place this water in the list corresponding to that bin in c_ax_dictionary
-            if ((posOx > args.minimum_axis_value) and (posOx < args.maximum_axis_value) and (posOyz2 < cylR2)):
+            if ((posOx > minimum_axis_value_for_inclusion) and (posOx < maximum_axis_value_for_inclusion) and (posOyz2 < cylR2)):
                 relevant_c_ax_coord = min(ch_ax_list, key = lambda x : abs(x - posOx)) #Determine to which coordinate bin this water is the closest (code line from https://stackoverflow.com/questions/12141150/from-list-of-integers-get-number-closest-to-a-given-value, this checks the different channel axis coordinates used in binning to find the one with the smallest difference between itself and posOx, giving the channel axis coordinate value used for binning closest to posOx)
                 c_ax_dictionary[relevant_c_ax_coord].append(waters[wi]) #Add the water to the appropriate channel axis coordinate bin
 
@@ -611,8 +617,8 @@ if __name__ == "__main__":
     parser.add_argument("--dictionary_of_simulations", required = True, type = str, help = "Path of a file (json format) containing a dictionary for accessing simulation data. Keys are shorthand for simulations. Values are dictionaries themselves- named key of 'parent_directory' corresponds to value of directory stem with .tpr and .xtc files.")
     parser.add_argument("--selected_simulations", required = True, nargs = "+", type = str, help = "Keys in --dictionary_of_simulations json to be used")
     parser.add_argument("--dictionary_of_colors", required = True, type = str, help = "Path of a file (json format) containing a dictionary of colors for plotting. Keys are those in --dictionary_of_simulations. Values are dictionaries themselves- named keys of 'data' and 'uncertainty' correspond each to a list of three floating point numbers representing the colors to use in plotting the values for this set of simulations and the error bars for this set of simulations, respectively.")
-    parser.add_argument("--minimum_axis_value", required = True, type = float, help = "Minimum channel axis value for binning water molecules")
-    parser.add_argument("--maximum_axis_value", required = True, type = float, help = "Maximum channel axis value for binning water molecules")
+    parser.add_argument("--minimum_axis_value", required = True, type = float, help = "Minimum channel axis value for center of a bin binning water molecules (actual bound is also determined by increments, which is updated from the Communications Biology figure)")
+    parser.add_argument("--maximum_axis_value", required = True, type = float, help = "Maximum channel axis value for center of a bin binning water molecules (actual bound is also determined by increments, which is updated from the Communications Biology figure)")
     parser.add_argument("--axis_increments", required = True, type = float, help = "Axis increment values for binning water molecules")
     parser.add_argument("--frame_stride", required = True, type = int, help = "Frame stride. This should be small enough that at least two frames are included for each trajectory.")
     parser.add_argument("--minimum_y_for_plot", type = float, help = "Minimum y value for the plot")
