@@ -9,6 +9,7 @@ When projections are used, they are based on the Ca coordinates of the relevant 
 MDAnalysis is used in these scripts. References for MDAnalysis are:
 
 Gowers et al. S. Benthall and S. Rostrup ed. Proceedings of the 15th Python in Science Conference, Austin, TX, 2016: 98.
+
 Michaud-Agrawal et al. J. Comput. Chem. 2011(32): 2319.
 
 MDAnalysis.analysis.hbonds.HydrogenBondAnalysis is used in water_hydrogen_bond_network.py. The reference (for a later version) is:
