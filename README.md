@@ -8,7 +8,7 @@ When projections are used, they are based on the Ca coordinates of the relevant 
 # Citations
 MDAnalysis is used in these scripts. References for MDAnalysis are:
 
-Gowers et al. S. Benthall and S. Rostrup ed. Proceedings of the 15th Python in Science Conference, Austin, TX, 2016: 98.
+Gowers et al. Benthall and Rostrup ed. Proceedings of the 15th Python in Science Conference, Austin, TX, 2016: 98.
 
 Michaud-Agrawal et al. J. Comput. Chem. 2011(32): 2319.
 
@@ -17,6 +17,7 @@ Smith et al. Phys. Chem. Chem. Phys. 2019(21): 9845.
 
 MDAnalysis.analysis.rms.RMSD is used in protein_RMSD.py. The references are:
 Theobald Acta Crystallographica A 2005(61): 478.
+
 Liu et al. J. Comput. Chem. 2010(31): 1561.
 
 # water_structure.py (Fig. 2d-e, Fig S3a, Fig S7, Fig S8)
