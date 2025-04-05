@@ -1,5 +1,5 @@
 # BM2-MD
-BM2 collaboration - Simulation analysis scripts
+BM2 collaboration - Simulation analysis scripts, corresponding to analyses in M. D. Gelenter*, V. S. Mandala*, M. J. M. Niesen*, D. A. Sharon*, A. J. Dregni, A. P. Willard, M. Hong, “Water Orientation and Dynamics in the Closed and Open Influenza B Virus M2 Proton Channels”, Communications Biology, 2021, 4, article number 338. *Equal contribution (https://www.nature.com/articles/s42003-021-01847-2) (sometimes slightly modified from paper analyses)
 
 # Overview
 All scripts take two inputs: a gromacs simulation input file [TPR] and a gromacs trajectory [XTC/TRR]. Additional details on what each script calcualtes are provided below. For help, execute a script with the `-h` flag.
